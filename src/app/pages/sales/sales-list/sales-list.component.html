@@ -1,0 +1,10 @@
+<po-page-list #poPageList p-title="Meus Pedidos">
+  <po-table
+    [p-sort]="true"
+    [p-items]="salesItems"
+    [p-columns]="columns"
+    [p-max-columns]="5"
+    [p-loading]="salesItems.length === 0"
+  >
+  </po-table>
+</po-page-list>
