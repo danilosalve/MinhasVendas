@@ -1,1 +1,14 @@
-<p>sales-form works!</p>
+<po-page-detail p-title="Novo Pedido" (p-back)="back()">
+  <po-tabs>
+    <po-tab [p-active]="true" p-label="Dados Gerais">
+      <po-dynamic-form [p-fields]="fields" [p-value]="sales"></po-dynamic-form>
+    </po-tab>
+    <po-tab p-label="Produtos">
+      <app-products-list [products$]="products$"></app-products-list>
+    </po-tab>
+    <po-tab p-label="Visualizar Json">
+      <pre class="po-md-2 po-mt-2">{{ sales | json }}</pre>
+    </po-tab>
+  </po-tabs>
+
+</po-page-detail>

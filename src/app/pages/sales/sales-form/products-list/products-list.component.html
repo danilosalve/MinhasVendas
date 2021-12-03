@@ -1,0 +1,47 @@
+<div class="po-md-12">
+  <po-button
+    class="po-md-2 po-mt-2"
+    p-type="primary"
+    p-label="Disparar Requisição"
+    (p-click)="buttonRequest()"
+    [p-loading]="isLoading"
+  ></po-button>
+  <po-button
+    class="po-md-2 po-mt-2"
+    p-type="danger"
+    p-label="Cancelar Requisição"
+    [hidden]="!isHidden"
+    (p-click)="buttonStopRequest()"
+  ></po-button>
+  <po-button
+    class="po-md-2 po-mt-2"
+    p-type="default"
+    p-label="Limpar Dados"
+    [hidden]="products.length <= 0"
+    (p-click)="buttonClear()"
+  ></po-button>
+</div>
+
+<po-modal #modal p-title="Produto"> Cliquei no Titulo  </po-modal>
+
+<div class="po-md-12 po-mt-2">
+  <po-list-view p-property-title="description" [p-items]="products" (p-title-action)="modal.open()">
+    <ng-template p-list-view-content-template let-item>
+      <div class="po-row">
+        <po-info
+          class="po-md-12"
+          p-label="Código"
+          [p-value]="item.id"
+          [p-orientation]="orientation"
+        ></po-info>
+        <po-info
+          class="po-md-12"
+          p-label="Preço"
+          [p-value]="item.price"
+          [p-orientation]="orientation"
+        ></po-info>
+      </div>
+    </ng-template>
+  </po-list-view>
+</div>
+

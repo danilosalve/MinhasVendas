@@ -1,14 +1,11 @@
 export interface Sales {
-  id: number;
+  id?: number;
   customerId: number;
-  paymentMethodId: number;
+  paymentMethodId?: number;
   issueDate: Date;
+  status: string;
 }
 
-export interface SalesBrw {
-  id: number;
-  customerId: number;
+export interface SalesBrw extends Sales {
   customerName?: string;
-  paymentMethodId: number;
-  issueDate: Date;
 }

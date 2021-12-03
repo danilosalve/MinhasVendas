@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PoNotificationService, PoTableColumn } from '@po-ui/ng-components';
+import { Router } from '@angular/router';
+import { PoNotificationService, PoPageAction, PoTableColumn } from '@po-ui/ng-components';
 import { switchMap, take } from 'rxjs/operators';
 
 import { CustomerService } from 'src/app/shared/services/customer.service';
@@ -15,11 +16,15 @@ export class SalesListComponent implements OnInit {
   salesItems: SalesBrw[] = [];
   columns: Array<PoTableColumn> = [];
   isLoading = true;
+  actions: Array<PoPageAction> = [
+    {label: 'Novo', url: 'sales/new', icon: 'po-icon-plus'}
+  ];
 
   constructor(
     protected salesService: SalesService,
     protected customerService: CustomerService,
-    protected poNotification: PoNotificationService
+    protected poNotification: PoNotificationService,
+    protected router: Router
   ) {}
 
   ngOnInit(): void {

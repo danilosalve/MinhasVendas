@@ -1,20 +1,18 @@
+import { Product } from './../interfaces/product';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PoComboOption } from '@po-ui/ng-components';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-
-import { Customer } from '../interfaces/customer';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
-  readonly apiPath = 'api/customer/';
+export class ProductService {
+  readonly apiPath = 'api/products/';
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.apiPath).pipe(
+  getAll(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiPath).pipe(
       retry(2),
       catchError((error: HttpErrorResponse) => {
         return throwError(error);
@@ -22,20 +20,13 @@ export class CustomerService {
     );
   }
 
-  getById(id: number): Observable<Customer> {
+  getById(id: number): Observable<Product> {
     const url = `${this.apiPath}${id}`;
-    return this.http.get<Customer>(url).pipe(
+    return this.http.get<Product>(url).pipe(
       retry(2),
       catchError((error: HttpErrorResponse) => {
         return throwError(error);
       })
     );
-  }
-
-  getCustomerComboOptions(customers: Customer[]): PoComboOption[] {
-    return customers.map(customer => ({
-      value: customer.id,
-      label: customer.name
-    }))
   }
 }
