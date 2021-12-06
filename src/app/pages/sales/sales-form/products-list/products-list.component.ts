@@ -9,22 +9,20 @@ import { ProductService } from 'src/app/shared/services/product.service';
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.css'],
 })
-export class ProductsListComponent implements OnInit, OnDestroy {
+export class ProductsListComponent implements OnDestroy {
   @Input() products$ = new Subscription();
 
   isHidden = false;
   stopRequest = false;
   products: Product[] = [];
   isLoading = false;
-  
+
   constructor(
     protected productService: ProductService,
     protected poNotification: PoNotificationService
   ) {}
 
   orientation: PoInfoOrientation = PoInfoOrientation.Horizontal;
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     console.log('passei no destroy');
@@ -60,6 +58,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.canShowButton(false);
         this.poNotification.success('Produtos Carregados');
-      });      
+      });
   }
 }
