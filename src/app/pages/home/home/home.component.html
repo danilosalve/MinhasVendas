@@ -1,0 +1,27 @@
+<po-page-default>
+  <po-loading-overlay [hidden]="!isLoading" p-text="Carregando Indicadores"> </po-loading-overlay>
+  <po-container [hidden]="isLoading">
+    <div class="po-font-title po-mb-3">Performance de Vendas</div>
+    <div class="po-row">
+      <div class="po-md-6">
+        <po-gauge
+          p-title="Pedidos Encerrados"
+          [p-value]="closedSales"
+          [p-ranges]="salesRanges"
+          [p-height]="410"
+        ></po-gauge>
+      </div>
+
+      <div class="po-md-6">
+        <po-chart
+          p-title="Pedidos em Abertos x Encerrados"
+          [p-series]="sales"
+          [p-type]="typeChart"
+          (p-series-click)="showMeSales()"
+          [p-height]="410"
+        >
+        </po-chart>
+      </div>
+    </div>
+  </po-container>
+</po-page-default>

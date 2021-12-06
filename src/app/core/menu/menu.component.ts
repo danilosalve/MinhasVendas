@@ -4,8 +4,7 @@ import { PoMenuItem } from '@po-ui/ng-components';
 
 @Component({
   selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css'],
+  templateUrl: './menu.component.html'
 })
 export class MenuComponent implements OnInit {
   menus: Array<PoMenuItem> = [];
