@@ -1,38 +1,27 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { PoComboOption, PoDynamicFormField, PoTableColumn } from '@po-ui/ng-components';
-import { Observable, of, throwError, forkJoin } from 'rxjs';
-import { catchError, retry, take, switchMap, map, tap } from 'rxjs/operators';
 
+import { Injectable, Injector } from '@angular/core';
+import { PoComboOption, PoDynamicFormField, PoTableColumn } from '@po-ui/ng-components';
+import { forkJoin } from 'rxjs';
+
+import { BaseResourceService } from 'src/app/shared/services/base-resource.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
-import { Sales, SalesBrw } from './sales';
+import { PaymentMethodService } from 'src/app/shared/services/payment-method.service';
+import { Sales } from '../interfaces/sales';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SalesService {
-  readonly apiPath = 'api/sales/';
+export class SalesService extends BaseResourceService<Sales> {
   constructor(
-    private http: HttpClient,
-    private customerService: CustomerService
-  ) {}
+    protected injector: Injector,
+    protected customerService: CustomerService,
+    protected paymentService: PaymentMethodService
+    ) {
+      super('api/sales/', injector);
+    }
 
-  getAll(): Observable<Sales[]> {
-    return this.http.get<Sales[]>(this.apiPath).pipe(
-      retry(2),
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error);
-      })
-    );
-  }
-
-  getById(id: number): Observable<Sales> {
-    return this.http.get<Sales>(`${this.apiPath}/${id}`).pipe(
-      retry(2),
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error);
-      })
-    );
+  getComboOptions(resources: Sales[]): PoComboOption[] {
+    throw new Error('Method not implemented.');
   }
 
   getColumns(): Array<PoTableColumn> {
@@ -51,16 +40,17 @@ export class SalesService {
   getFields(): Array<PoDynamicFormField> {
     let customerList:PoComboOption[];
     forkJoin({
-      customers: this.customerService.getAll()
+      customers: this.customerService.getAll(),
+      payments: this.paymentService.getAll()
     }).subscribe( response => {
-      customerList = this.customerService.getCustomerComboOptions(response.customers);
+      customerList = this.customerService.getComboOptions(response.customers);
     })
 
     return [
         {
           label: 'Cliente',
           property: 'customerId',
-          gridColumns: 5,
+          gridColumns: 3,
           options: [
             { value: 2, label: 'Ted Mosby' },
             { value: 3, label: 'Robin Scherbatsky' },
@@ -80,8 +70,20 @@ export class SalesService {
           property: 'issueDate',
           type: 'date',
           format: 'mm/dd/yyyy',
-          gridColumns: 3,
+          gridColumns: 2,
           gridSmColumns: 12
+        },
+        {
+          label: 'Cond. Pagamento',
+          property: 'paymentMethodId',
+          gridColumns: 3,
+          options: [
+            { value: 1, label: 'A Vista' },
+            { value: 2, label: 'A prazo 30 Dias' },
+            { value: 3, label: '3x - 30, 60 e 90' },
+            { value: 4, label: 'Pagamento Antecipado' },
+            { value: 5, label: '2x - 0 + 30 dias' },
+          ]
         }
       ]
   }

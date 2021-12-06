@@ -1,38 +1,20 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { PoComboOption } from '@po-ui/ng-components';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
+import { BaseResourceService } from './base-resource.service';
 import { Customer } from '../interfaces/customer';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
-  readonly apiPath = 'api/customer/';
-  constructor(private http: HttpClient) {}
-
-  getAll(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.apiPath).pipe(
-      retry(2),
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error);
-      })
-    );
+export class CustomerService extends BaseResourceService<Customer> {
+  constructor(
+    protected injector: Injector
+  ) {
+    super('api/customer/', injector);
   }
 
-  getById(id: number): Observable<Customer> {
-    const url = `${this.apiPath}${id}`;
-    return this.http.get<Customer>(url).pipe(
-      retry(2),
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error);
-      })
-    );
-  }
-
-  getCustomerComboOptions(customers: Customer[]): PoComboOption[] {
+  getComboOptions(customers: Customer[]): PoComboOption[] {
     return customers.map(customer => ({
       value: customer.id,
       label: customer.name

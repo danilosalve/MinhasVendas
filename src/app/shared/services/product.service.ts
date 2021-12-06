@@ -1,32 +1,25 @@
+
+import { Injectable, Injector } from '@angular/core';
+import { PoComboOption } from '@po-ui/ng-components';
+
+import { BaseResourceService } from './base-resource.service';
 import { Product } from './../interfaces/product';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
-  readonly apiPath = 'api/products/';
-  constructor(private http: HttpClient) {}
-
-  getAll(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiPath).pipe(
-      retry(2),
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error);
-      })
-    );
+export class ProductService extends BaseResourceService<Product>{
+  constructor(
+    protected injector: Injector
+  ) {
+    super('api/products/', injector);
   }
 
-  getById(id: number): Observable<Product> {
-    const url = `${this.apiPath}${id}`;
-    return this.http.get<Product>(url).pipe(
-      retry(2),
-      catchError((error: HttpErrorResponse) => {
-        return throwError(error);
-      })
-    );
+  getComboOptions(products: Product[]): PoComboOption[] {
+    return products.map(product => ({
+      value: product.id,
+      label: product.description
+    }))
   }
+
 }

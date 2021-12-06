@@ -1,9 +1,9 @@
-import { SalesService } from './../shared/sales.service';
+import { SalesService } from '../shared/services/sales.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PoDynamicFormField } from '@po-ui/ng-components';
 
-import { Sales } from '../shared/sales';
+import { Sales } from '../shared/interfaces/sales';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -36,6 +36,6 @@ export class SalesFormComponent implements OnInit {
 
   getFields(): void {
     this.fields = this.salesService.getFields();
-  } 
-  
+  }
+
 }

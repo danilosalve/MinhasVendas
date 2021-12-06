@@ -1,3 +1,5 @@
+import { SalesItem } from './sales-item';
+
 export interface Sales {
   id?: number;
   customerId: number;
@@ -8,4 +10,8 @@ export interface Sales {
 
 export interface SalesBrw extends Sales {
   customerName?: string;
+}
+
+export interface SalesOrder extends Sales {
+  item: Array<SalesItem>;
 }

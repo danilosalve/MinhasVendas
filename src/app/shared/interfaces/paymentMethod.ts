@@ -1,4 +1,4 @@
-export interface PaymentMethod {
-  id: number;
+import { BaseResource } from './BaseResource';
+export interface PaymentMethod extends BaseResource {
   description: string;
 }

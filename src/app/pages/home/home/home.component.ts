@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { PoChartSerie, PoChartType, PoGaugeRanges } from '@po-ui/ng-components';
 
-import { SalesService } from './../../sales/shared/sales.service';
+import { SalesService } from '../../sales/shared/services/sales.service';
 import { Router } from '@angular/router';
 
 @Component({

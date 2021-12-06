@@ -1,6 +1,7 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { PoInfoOrientation, PoNotificationService } from '@po-ui/ng-components';
 import { Subscription } from 'rxjs';
+
 import { Product } from 'src/app/shared/interfaces/product';
 import { ProductService } from 'src/app/shared/services/product.service';
 
@@ -21,11 +22,9 @@ export class ProductsListComponent implements OnDestroy {
     protected productService: ProductService,
     protected poNotification: PoNotificationService
   ) {}
-
   orientation: PoInfoOrientation = PoInfoOrientation.Horizontal;
 
   ngOnDestroy(): void {
-    console.log('passei no destroy');
     this.products$.unsubscribe();
   }
 
@@ -58,6 +57,7 @@ export class ProductsListComponent implements OnDestroy {
         this.isLoading = false;
         this.canShowButton(false);
         this.poNotification.success('Produtos Carregados');
+        window.navigator.vibrate(2000);
       });
   }
 }

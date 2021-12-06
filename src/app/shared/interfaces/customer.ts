@@ -1,4 +1,4 @@
-export interface Customer {
-  id: number;
+import { BaseResource } from './BaseResource';
+export interface Customer extends BaseResource {
   name: string;
 }

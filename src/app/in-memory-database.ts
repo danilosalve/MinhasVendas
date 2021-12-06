@@ -3,7 +3,7 @@ import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
 
 import { Customer } from './shared/interfaces/customer';
 import { PaymentMethod } from './shared/interfaces/paymentMethod';
-import { Sales } from './pages/sales/shared/sales';
+import { Sales } from './pages/sales/shared/interfaces/sales';
 import { delay } from 'rxjs/operators';
 import { Product } from './shared/interfaces/product';
 
@@ -83,7 +83,7 @@ export class InMemoryDatabase implements InMemoryDbService {
     ];
     const db = { customer, paymentMethod, sales, products };
 
-    return of(db).pipe(delay(10300));
+    return of(db).pipe(delay(1300));
   }
 
   randomDate() : Date {

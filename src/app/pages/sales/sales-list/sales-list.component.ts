@@ -9,8 +9,8 @@ import { of, Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CustomerService } from 'src/app/shared/services/customer.service';
-import { SalesBrw } from '../shared/sales';
-import { SalesService } from './../shared/sales.service';
+import { SalesBrw } from '../shared/interfaces/sales';
+import { SalesService } from '../shared/services/sales.service';
 
 @Component({
   selector: 'app-sales-list',
