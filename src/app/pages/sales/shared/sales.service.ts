@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PoComboOption, PoDynamicFormField, PoTableColumn } from '@po-ui/ng-components';
 import { Observable, of, throwError, forkJoin } from 'rxjs';
-import { catchError, retry, take } from 'rxjs/operators';
+import { catchError, retry, take, switchMap, map, tap } from 'rxjs/operators';
 
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { Sales, SalesBrw } from './sales';
@@ -33,34 +33,6 @@ export class SalesService {
         return throwError(error);
       })
     );
-  }
-
-  getAllWithCustomers(): Observable<SalesBrw[]> {
-    let salesBrw: SalesBrw[] = [];
-    this.getAll()
-    .pipe(take(1))
-    .subscribe(result => {
-      result.forEach((sale) => {
-        let item: SalesBrw;
-        item = {
-          id: sale.id,
-          issueDate: sale.issueDate,
-          customerId: sale.customerId,
-          paymentMethodId: sale.paymentMethodId,
-          status: sale.status
-        };
-        this.customerService
-          .getById(sale.customerId)
-          .subscribe(res =>
-            item.customerName = res.name,
-            catchError((error: HttpErrorResponse) => {
-              return throwError(error);
-            })
-          );
-        salesBrw.push(item);
-      });
-    });
-    return of(salesBrw);
   }
 
   getColumns(): Array<PoTableColumn> {

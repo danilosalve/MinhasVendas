@@ -76,12 +76,14 @@ export class InMemoryDatabase implements InMemoryDbService {
       { id: 7, customerId: 5, paymentMethodId: 3, issueDate: this.randomDate(), status: 'A' },
       { id: 8, customerId: 1, paymentMethodId: 1, issueDate: this.randomDate(), status: 'A' },
       { id: 9, customerId: 9, paymentMethodId: 5, issueDate: this.randomDate(), status: 'A' },
-      { id: 10, customerId: 1, paymentMethodId: 1, issueDate: this.randomDate(), status: 'A' },
-      { id: 11, customerId: 1, paymentMethodId: 2, issueDate: this.randomDate(), status: 'A' },
+      { id: 10, customerId: 12, paymentMethodId: 2, issueDate: this.randomDate(), status: 'E' },
+      { id: 11, customerId: 1, paymentMethodId: 1, issueDate: this.randomDate(), status: 'A' },
+      { id: 12, customerId: 1, paymentMethodId: 2, issueDate: this.randomDate(), status: 'A' },
+      { id: 13, customerId: 12, paymentMethodId: 3, issueDate: this.randomDate(), status: 'A' },
     ];
     const db = { customer, paymentMethod, sales, products };
 
-    return of(db).pipe(delay(5000));
+    return of(db).pipe(delay(10300));
   }
 
   randomDate() : Date {

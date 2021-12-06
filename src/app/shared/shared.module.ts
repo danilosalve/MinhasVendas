@@ -5,14 +5,19 @@ import { PoTemplatesModule } from '@po-ui/ng-templates';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import { FilterInputComponent } from './components/filter-input/filter-input.component';
+
 @NgModule({
+  declarations: [
+    FilterInputComponent
+  ],
   imports: [
     CommonModule,
     PoModule,
     PoTemplatesModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -20,7 +25,8 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    PoTemplatesModule
+    PoTemplatesModule,
+    FilterInputComponent
   ]
 })
 export class SharedModule {}

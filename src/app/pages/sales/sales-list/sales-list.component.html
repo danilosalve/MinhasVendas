@@ -1,10 +1,20 @@
 <po-page-list #poPageList p-title="Meus Pedidos" [p-actions]="actions">
+  <div class="po-row">
+    <div class="po-offset-xl-9 po-offset-lg-8 po-md-12 po-sm-12">
+      <app-filter-input
+        placeHolder="Pesquisar..."
+        (changeSearch)="searchSales($event)"
+        help="Efetue a busca utilizando código do Pedido ou Nome do Cliente"
+        [debounceInput]="1000"
+      ></app-filter-input>
+    </div>
+  </div>
   <po-table
     [p-sort]="true"
     [p-items]="salesItems"
     [p-columns]="columns"
     [p-max-columns]="5"
-    [p-loading]="salesItems.length === 0"
+    [p-loading]="isLoading"
   >
   </po-table>
 </po-page-list>
