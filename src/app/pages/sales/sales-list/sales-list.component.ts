@@ -100,6 +100,7 @@ export class SalesListComponent implements OnInit, OnDestroy {
   }
 
   showSale(sale: Sales): void {
+    this.isLoading = true;
     this.router.navigate(['sales/view', sale.id]);
   }
 }

@@ -1,20 +1,8 @@
 <po-page-detail p-title="Resumo do Pedido de Venda" (p-back)="back()">
+  <po-dynamic-view [p-fields]="fields" [p-value]="sale"></po-dynamic-view>
 
-  <po-loading-overlay
-    p-text="Carregando Pedido"
-    [hidden]="!isLoading"
-  ></po-loading-overlay>
-
-  <po-dynamic-view
-    [hidden]="isLoading"
-    [p-fields]="fields"
-    [p-value]="sale"
-  ></po-dynamic-view>
-
-  <div [hidden]="isLoading">
-    <br/>
-    <hr/>
-    <po-divider p-label="Items - Produtos"></po-divider>
-    <app-item-detail></app-item-detail>
-  </div>
+  <br />
+  <hr />
+  <po-divider p-label="Items - Produtos"></po-divider>
+  <app-item-detail></app-item-detail>
 </po-page-detail>

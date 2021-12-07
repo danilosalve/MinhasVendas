@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   PoDynamicViewField,
-  PoNotificationService,
+  PoNotificationService
 } from '@po-ui/ng-components';
-import { map, switchMap, take, tap } from 'rxjs/operators';
-
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { PaymentMethodService } from 'src/app/shared/services/payment-method.service';
 import { Sales } from '../shared/interfaces/sales';
 import { SalesItemService } from '../shared/services/sales-item.service';
 import { SalesService } from './../shared/services/sales.service';
+
 
 @Component({
   selector: 'app-sales-details',
@@ -19,11 +18,10 @@ import { SalesService } from './../shared/services/sales.service';
 export class SalesDetailsComponent implements OnInit {
   fields: PoDynamicViewField[] = [];
   sale!: Sales;
-  isLoading = true;
 
   constructor(
     protected poNotification: PoNotificationService,
-    protected route: ActivatedRoute,
+    protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected customerService: CustomerService,
     protected paymentService: PaymentMethodService,
@@ -41,53 +39,18 @@ export class SalesDetailsComponent implements OnInit {
   }
 
   loadSale(): void {
-    let paymentId = 0;
-    this.route.paramMap
-      .pipe(
-        tap(() => this.isLoading = true),
-        switchMap((params: ParamMap) =>
-          this.salesService.getById(+params.getAll('salesId')).pipe(
-            take(1),
-            switchMap( (sale: Sales) =>
-              this.customerService.getById(sale.customerId)
-                .pipe(
-                  map(customer => ({
-                    ...sale,
-                    customerName: customer.name
-                  }))
-                )
-            ),
-            tap(
-              sale => paymentId = sale.paymentMethodId ? sale.paymentMethodId : 0
-            ),
-            switchMap( sale =>
-              this.paymentService.getById(paymentId).pipe(
-                map( payment => ({
-                  ...sale,
-                  paymentMethodDescription: payment.description
-                }))
-              )
-            ),
-          )
-        ),
-        tap(() => this.isLoading = false),
-      )
-      .subscribe(
-        (sale) => {
-          this.sale = sale;
-          if (this.sale.status === 'A') {
-            this.sale.status = 'Aberto';
-          } else {
-            this.sale.status = 'Encerrado';
+    this.sale = this.activatedRoute.snapshot.data['sale'];
 
-            let index = this.fields.findIndex( field => field.property === 'status');
-            if (index >= 0 ) {
-              this.fields[index].color = 'color-07';
-            }
-          }
-        },
-        () => this.poNotification.error('Falha ao obter Venda')
-      );
+    if (this.sale.status === 'A') {
+      this.sale.status = 'Aberto';
+    } else {
+      this.sale.status = 'Encerrado';
+
+      let index = this.fields.findIndex( field => field.property === 'status');
+      if (index >= 0 ) {
+        this.fields[index].color = 'color-07';
+      }
+    }
   }
 
   back(): void {
