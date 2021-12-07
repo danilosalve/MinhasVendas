@@ -7,6 +7,7 @@ import { SalesFormComponent } from './sales-form/sales-form.component';
 import { ProductsListComponent } from './sales-form/products-list/products-list.component';
 import { GeneralDataComponent } from './sales-form/general-data/general-data.component';
 import { SalesDetailsComponent } from './sales-details/sales-details.component';
+import { ItemDetailComponent } from './sales-details/item-detail/item-detail.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { SalesDetailsComponent } from './sales-details/sales-details.component';
     SalesFormComponent,
     ProductsListComponent,
     GeneralDataComponent,
-    SalesDetailsComponent
+    SalesDetailsComponent,
+    ItemDetailComponent
   ],
 })
 export class SalesModule { }

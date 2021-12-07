@@ -9,6 +9,7 @@ import { map, switchMap, take, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { PaymentMethodService } from 'src/app/shared/services/payment-method.service';
 import { Sales } from '../shared/interfaces/sales';
+import { SalesItemService } from '../shared/services/sales-item.service';
 import { SalesService } from './../shared/services/sales.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class SalesDetailsComponent implements OnInit {
     protected customerService: CustomerService,
     protected paymentService: PaymentMethodService,
     protected salesService: SalesService,
+    protected salesItemService: SalesItemService
   ) {}
 
   ngOnInit(): void {
@@ -77,7 +79,11 @@ export class SalesDetailsComponent implements OnInit {
             this.sale.status = 'Aberto';
           } else {
             this.sale.status = 'Encerrado';
-            this.fields[4].color = 'color-07';
+
+            let index = this.fields.findIndex( field => field.property === 'status');
+            if (index >= 0 ) {
+              this.fields[index].color = 'color-07';
+            }
           }
         },
         () => this.poNotification.error('Falha ao obter Venda')

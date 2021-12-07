@@ -6,6 +6,7 @@ import { PaymentMethod } from './shared/interfaces/paymentMethod';
 import { Sales } from './pages/sales/shared/interfaces/sales';
 import { delay } from 'rxjs/operators';
 import { Product } from './shared/interfaces/product';
+import { SalesItem } from './pages/sales/shared/interfaces/sales-item';
 
 export class InMemoryDatabase implements InMemoryDbService {
   createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
@@ -81,7 +82,17 @@ export class InMemoryDatabase implements InMemoryDbService {
       { id: 12, customerId: 1, paymentMethodId: 2, issueDate: this.randomDate(), status: 'A' },
       { id: 13, customerId: 12, paymentMethodId: 3, issueDate: this.randomDate(), status: 'A' },
     ];
-    const db = { customer, paymentMethod, sales, products };
+
+    const salesItems: SalesItem[] = [
+      { id: 1, salesId: 1, itemId: 1, productId: 1, value: 20.99, quantity: 2, amount: 41.98},
+      { id: 2, salesId: 1, itemId: 2, productId: 6, value: 14.98, quantity: 1, amount: 14.98},
+      { id: 3, salesId: 2, itemId: 1, productId: 3, value: 29.9, quantity: 5, amount: 145.5},
+      { id: 4, salesId: 2, itemId: 2, productId: 4, value: 10.49, quantity: 4, amount: 41.96},
+      { id: 5, salesId: 2, itemId: 3, productId: 1, value: 20.99, quantity: 1, amount: 20.99},
+      { id: 6, salesId: 2, itemId: 4, productId: 6, value: 14.98, quantity: 7, amount: 104.86}
+    ]
+
+    const db = { customer, paymentMethod, products, sales, salesItems };
 
     return of(db).pipe(delay(1300));
   }

@@ -2,21 +2,21 @@
   <po-button
     class="po-md-2 po-mt-2"
     p-type="primary"
-    p-label="Disparar Requisição"
+    p-label="Carregar Produtos"
     (p-click)="buttonRequest()"
     [p-loading]="isLoading"
   ></po-button>
   <po-button
     class="po-md-2 po-mt-2"
     p-type="danger"
-    p-label="Cancelar Requisição"
+    p-label="Cancelar"
     [hidden]="!isHidden"
     (p-click)="buttonStopRequest()"
   ></po-button>
   <po-button
     class="po-md-2 po-mt-2"
     p-type="default"
-    p-label="Limpar Dados"
+    p-label="Limpar Lista"
     [hidden]="products.length <= 0"
     (p-click)="buttonClear()"
   ></po-button>
