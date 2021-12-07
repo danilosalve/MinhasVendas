@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { PoComboOption } from '@po-ui/ng-components';
+import { PoSelectOption } from '@po-ui/ng-components';
 
 import { BaseResourceService } from './base-resource.service';
 import { Customer } from '../interfaces/customer';
@@ -14,7 +14,7 @@ export class CustomerService extends BaseResourceService<Customer> {
     super('api/customer/', injector);
   }
 
-  getComboOptions(customers: Customer[]): PoComboOption[] {
+  getComboOptions(customers: Customer[]): PoSelectOption[] {
     return customers.map(customer => ({
       value: customer.id,
       label: customer.name

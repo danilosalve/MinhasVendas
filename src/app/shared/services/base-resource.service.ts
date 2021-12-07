@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injector } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { PoComboOption } from '@po-ui/ng-components';
+import { PoSelectOption } from '@po-ui/ng-components';
 
 export abstract class BaseResourceService <T>{
   protected http: HttpClient;
@@ -33,5 +33,7 @@ export abstract class BaseResourceService <T>{
     );
   }
 
-  abstract getComboOptions(resources: T[]): PoComboOption[];
+  getComboOptions(resources: T[]): PoSelectOption[] {
+    return []
+  };
 }

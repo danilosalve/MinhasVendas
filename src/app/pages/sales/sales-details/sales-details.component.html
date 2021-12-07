@@ -1,0 +1,7 @@
+<po-page-detail p-title="Resumo do Pedido de Venda" (p-back)="back()">
+  <po-loading-overlay
+    p-text="Carregando Pedido"
+    [hidden]="!isLoading"
+  ></po-loading-overlay>
+  <po-dynamic-view [hidden]="isLoading" [p-fields]="fields" [p-value]="sale"></po-dynamic-view>
+</po-page-detail>

@@ -1,8 +1,10 @@
+import { Sales } from './../shared/interfaces/sales';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   PoNotificationService,
   PoPageAction,
+  PoTableAction,
   PoTableColumn,
 } from '@po-ui/ng-components';
 import { of, Subscription } from 'rxjs';
@@ -14,17 +16,28 @@ import { SalesService } from '../shared/services/sales.service';
 
 @Component({
   selector: 'app-sales-list',
-  templateUrl: './sales-list.component.html',
-  styleUrls: ['./sales-list.component.css'],
+  templateUrl: './sales-list.component.html'
 })
 export class SalesListComponent implements OnInit, OnDestroy {
-  salesItems: SalesBrw[] = [];
   columns: Array<PoTableColumn> = [];
   isLoading = true;
+  salesItems: SalesBrw[] = [];
+  sales$ = new Subscription();
   actions: Array<PoPageAction> = [
     { label: 'Novo', url: 'sales/new', icon: 'po-icon-plus' },
   ];
-  sales$ = new Subscription();
+  actionsSales: Array<PoTableAction> = [
+    {
+      action: this.showSale.bind(this),
+      icon: 'po-icon po-icon-edit',
+      label: 'Editar'
+    },
+    {
+      action: this.showSale.bind(this),
+      icon: 'po-icon-eye',
+      label: 'Visualizar'
+    }
+  ]
 
   constructor(
     protected salesService: SalesService,
@@ -84,5 +97,9 @@ export class SalesListComponent implements OnInit, OnDestroy {
 
   searchSales(search: string): void {
     this.getSales(search);
+  }
+
+  showSale(sale: Sales): void {
+    this.router.navigate(['sales/view', sale.id]);
   }
 }

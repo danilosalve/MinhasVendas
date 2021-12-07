@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 
 import { BaseResourceService } from './base-resource.service';
 import { PaymentMethod } from '../interfaces/paymentMethod';
-import { PoComboOption } from '@po-ui/ng-components';
+import { PoSelectOption } from '@po-ui/ng-components';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class PaymentMethodService extends BaseResourceService<PaymentMethod> {
     super('api/paymentMethod/', injector);
   }
 
-  getComboOptions(payments: PaymentMethod[]): PoComboOption[] {
+  getComboOptions(payments: PaymentMethod[]): PoSelectOption[] {
     return payments.map(payment => ({
       value: payment.id,
       label: payment.description
