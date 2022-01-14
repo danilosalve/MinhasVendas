@@ -1,4 +1,4 @@
-<po-page-detail p-title="Novo Pedido" (p-back)="back()">
+<po-page-edit p-title="Novo Pedido" [p-breadcrumb]="breadcrumb" (p-cancel)="cancel()" (p-save)="onSubmit()" [p-disable-submit]="isDisableSubmit">
   <po-tabs>
     <po-tab [p-active]="true" p-label="Dados Gerais">
     <app-general-data [sales]="sales"></app-general-data>
@@ -15,4 +15,4 @@
       </po-widget>
     </po-tab>
   </po-tabs>
-</po-page-detail>
+</po-page-edit>
