@@ -1,14 +1,12 @@
-<div *ngFor="let item of items">
-  <po-dynamic-view
-    [hidden]="isLoading"
-    [p-fields]="fields"
-    [p-value]="item"
-  ></po-dynamic-view>
-  <po-divider></po-divider>
+<div appDarkenOnHover *ngFor="let item of items">
+    <po-dynamic-view
+      [hidden]="isLoading"
+      [p-fields]="fields"
+      [p-value]="item"
+    ></po-dynamic-view>
+    <po-divider></po-divider>
 </div>
 
 <div style="text-align: center" [hidden]="items.length > 0">
-  <p class="po-font-text-small-bold">
-    Não há dados
-  </p>
+  <p class="po-font-text-small-bold">Não há dados</p>
 </div>

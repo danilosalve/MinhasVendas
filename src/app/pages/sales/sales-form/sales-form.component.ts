@@ -1,8 +1,9 @@
-import { Component  } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
 import { Sales } from '../shared/interfaces/sales';
+import { SalesItem } from './../shared/interfaces/sales-item';
+
 
 @Component({
   selector: 'app-sales-form',
@@ -16,6 +17,7 @@ export class SalesFormComponent {
     issueDate: new Date(),
     status: 'A'
   };
+  salesItems: SalesItem[] = [];
 
   constructor(
     protected router: Router,
@@ -25,4 +27,7 @@ export class SalesFormComponent {
     this.router.navigate(['sales']);
   }
 
+  addSalesItem(salesItem: SalesItem): void {
+    this.salesItems = this.salesItems.concat(salesItem);
+  }
 }

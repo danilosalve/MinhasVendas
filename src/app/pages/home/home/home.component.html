@@ -3,7 +3,7 @@
   <po-container [hidden]="isLoading">
     <div class="po-font-title po-mb-3">Performance de Vendas</div>
     <div class="po-row">
-      <div class="po-md-6">
+      <div appDarkenOnHover class="po-md-6">
         <po-gauge
           p-title="Pedidos Encerrados"
           [p-value]="closedSales"
@@ -12,7 +12,7 @@
         ></po-gauge>
       </div>
 
-      <div class="po-md-6">
+      <div appDarkenOnHover class="po-md-6">
         <po-chart
           p-title="Pedidos em Abertos x Encerrados"
           [p-series]="sales"

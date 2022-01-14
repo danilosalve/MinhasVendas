@@ -4,10 +4,15 @@
     <app-general-data [sales]="sales"></app-general-data>
     </po-tab>
     <po-tab p-label="Produtos">
-      <app-products-list [products$]="products$"></app-products-list>
+      <app-products-list [products$]="products$" (changeItems)="addSalesItem($event)"></app-products-list>
     </po-tab>
     <po-tab p-label="Visualizar Json">
-      <pre class="po-md-2 po-mt-2">{{ sales | json }}</pre>
+      <po-widget appDarkenOnHover p-title="Cabeçalho do pedido">
+        <pre class="po-md-2 po-mt-2">{{ sales | json }}</pre>
+      </po-widget>
+      <po-widget appDarkenOnHover p-title="Items do pedido">
+        <pre class="po-md-2 po-mt-2">{{ salesItems | json }}</pre>
+      </po-widget>
     </po-tab>
   </po-tabs>
 </po-page-detail>

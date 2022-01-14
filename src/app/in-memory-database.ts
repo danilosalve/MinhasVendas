@@ -1,12 +1,12 @@
-import { Observable, of } from 'rxjs';
 import { InMemoryDbService, RequestInfo } from 'angular-in-memory-web-api';
-
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { Sales } from './pages/sales/shared/interfaces/sales';
+import { SalesItem } from './pages/sales/shared/interfaces/sales-item';
 import { Customer } from './shared/interfaces/customer';
 import { PaymentMethod } from './shared/interfaces/paymentMethod';
-import { Sales } from './pages/sales/shared/interfaces/sales';
-import { delay } from 'rxjs/operators';
 import { Product } from './shared/interfaces/product';
-import { SalesItem } from './pages/sales/shared/interfaces/sales-item';
+
 
 export class InMemoryDatabase implements InMemoryDbService {
   createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
@@ -26,36 +26,36 @@ export class InMemoryDatabase implements InMemoryDbService {
     ];
 
     const products: Product[] = [
-      { id:1, description: 'Pearl Jam', price: Math.random()},
-      { id:2, description: 'Alabama Shakes', price: Math.random()},
-      { id:3, description: 'The Black Keys', price: Math.random()},
-      { id:4, description: 'Queen', price: Math.random()},
-      { id:5, description: 'Five Finger Death Punch', price: Math.random()},
-      { id:6, description: 'System of a Down', price: Math.random()},
-      { id:7, description: 'Eagles of Death Metal', price: Math.random()},
-      { id:8, description: 'Weezer', price: Math.random()},
-      { id:9, description: 'Eddie Vedder', price: Math.random()},
-      { id:10, description: 'Oasis', price: Math.random()},
-      { id:11, description: 'Foo Fighters', price: Math.random()},
-      { id:12, description: 'Irá!', price: Math.random()},
-      { id:13, description: 'Capital Inicial', price: Math.random()},
-      { id:14, description: 'Titãs', price: Math.random()},
-      { id:15, description: 'Raimundos', price: Math.random()},
-      { id:16, description: 'The Offspring', price: Math.random()},
-      { id:17, description: 'Florece + The Machine', price: Math.random()},
-      { id:18, description: 'The Roots', price: Math.random()},
-      { id:19, description: 'Blur', price: Math.random()},
-      { id:20, description: 'Fitz and the Trantrums', price: Math.random()},
-      { id:21, description: 'Cage the Elephant', price: Math.random()},
-      { id:22, description: 'MAGIC!', price: Math.random()},
-      { id:23, description: 'Imagine Dragons', price: Math.random()},
-      { id:24, description: 'Stereophonics', price: Math.random()},
-      { id:25, description: 'Arctic Moneys', price: Math.random()},
-      { id:26, description: 'Foster The People', price: Math.random()},
-      { id:27, description: 'Queens of the Stone Age', price: Math.random()},
-      { id:28, description: 'X Ambassadors', price: Math.random()},
-      { id:29, description: 'Needtobreathe', price: Math.random()},
-      { id:30, description: 'City and Colour', price: Math.random()}
+      { id:1, description: 'Pearl Jam', price: Math.random() * 100},
+      { id:2, description: 'Alabama Shakes', price: Math.random() * 100},
+      { id:3, description: 'The Black Keys', price: Math.random()* 100},
+      { id:4, description: 'Queen', price: Math.random()* 100},
+      { id:5, description: 'Five Finger Death Punch', price: Math.random()* 100},
+      { id:6, description: 'System of a Down', price: Math.random()* 100},
+      { id:7, description: 'Eagles of Death Metal', price: Math.random()* 100},
+      { id:8, description: 'Weezer', price: Math.random()* 100},
+      { id:9, description: 'Eddie Vedder', price: Math.random()* 100},
+      { id:10, description: 'Oasis', price: Math.random()* 100},
+      { id:11, description: 'Foo Fighters', price: Math.random()* 100},
+      { id:12, description: 'Irá!', price: Math.random()* 100},
+      { id:13, description: 'Capital Inicial', price: Math.random()* 100},
+      { id:14, description: 'Titãs', price: Math.random()* 100},
+      { id:15, description: 'Raimundos', price: Math.random()* 100},
+      { id:16, description: 'The Offspring', price: Math.random()* 100},
+      { id:17, description: 'Florece + The Machine', price: Math.random()* 100},
+      { id:18, description: 'The Roots', price: Math.random()* 100},
+      { id:19, description: 'Blur', price: Math.random()* 100},
+      { id:20, description: 'Fitz and the Trantrums', price: Math.random()* 100},
+      { id:21, description: 'Cage the Elephant', price: Math.random()* 100},
+      { id:22, description: 'MAGIC!', price: Math.random()* 100},
+      { id:23, description: 'Imagine Dragons', price: Math.random()* 100},
+      { id:24, description: 'Stereophonics', price: Math.random()* 100},
+      { id:25, description: 'Arctic Moneys', price: Math.random()* 100},
+      { id:26, description: 'Foster The People', price: Math.random()* 100},
+      { id:27, description: 'Queens of the Stone Age', price: Math.random()* 100},
+      { id:28, description: 'X Ambassadors', price: Math.random()* 100},
+      { id:29, description: 'Needtobreathe', price: Math.random()* 100},
+      { id:30, description: 'City and Colour', price: Math.random()* 100}
 
     ]
 

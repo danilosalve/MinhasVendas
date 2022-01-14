@@ -1,9 +1,9 @@
 
 import { Injectable, Injector } from '@angular/core';
-import { PoDynamicFormField, PoDynamicViewField, PoSelectOption, PoTableColumn } from '@po-ui/ng-components';
-
+import { PoDynamicFormField, PoDynamicViewField, PoTableColumn } from '@po-ui/ng-components';
 import { BaseResourceService } from 'src/app/shared/services/base-resource.service';
 import { Sales } from '../interfaces/sales';
+
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +44,7 @@ export class SalesService extends BaseResourceService<Sales> {
         label: 'Dt. Emissão',
         property: 'issueDate',
         type: 'date',
-        format: 'mm/dd/yyyy',
+        format: 'dd/mm/yyyy',
         gridColumns: 2,
         gridSmColumns: 12,
         gridMdColumns: 3,

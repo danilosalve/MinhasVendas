@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PoModule } from '@po-ui/ng-components';
-import { PoTemplatesModule } from '@po-ui/ng-templates';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { PoModule } from '@po-ui/ng-components';
+import { PoTemplatesModule } from '@po-ui/ng-templates';
 import { FilterInputComponent } from './components/filter-input/filter-input.component';
+import { DirectiveModule } from './directive/directive.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { FilterInputComponent } from './components/filter-input/filter-input.com
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
+    DirectiveModule
   ],
   exports: [
     CommonModule,
@@ -26,7 +27,8 @@ import { FilterInputComponent } from './components/filter-input/filter-input.com
     FormsModule,
     RouterModule,
     PoTemplatesModule,
-    FilterInputComponent
+    FilterInputComponent,
+    DirectiveModule
   ]
 })
 export class SharedModule {}

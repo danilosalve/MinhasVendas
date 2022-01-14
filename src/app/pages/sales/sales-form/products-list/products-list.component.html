@@ -5,6 +5,8 @@
     p-label="Carregar Produtos"
     (p-click)="buttonRequest()"
     [p-loading]="isLoading"
+    [hidden]="products.length > 0"
+    p-icon="po-icon-download"
   ></po-button>
   <po-button
     class="po-md-2 po-mt-2"
@@ -12,6 +14,7 @@
     p-label="Cancelar"
     [hidden]="!isHidden"
     (p-click)="buttonStopRequest()"
+    p-icon="po-icon-close"
   ></po-button>
   <po-button
     class="po-md-2 po-mt-2"
@@ -19,14 +22,66 @@
     p-label="Limpar Lista"
     [hidden]="products.length <= 0"
     (p-click)="buttonClear()"
+    p-icon="po-icon-delete"
   ></po-button>
 </div>
 
-<po-modal #modal p-title="Produto"> Cliquei no Titulo  </po-modal>
+<po-modal
+  #detailsModal
+  p-title="Adicionar item"
+  [p-primary-action]="primaryAction"
+  [p-secondary-action]="cancelAction"
+>
+  <form #f="ngForm">
+    <po-decimal
+      p-label="Preço"
+      p-disabled="true"
+      p-icon="po-icon-finance-secure"
+      name="price"
+      [(ngModel)]="price"
+    ></po-decimal>
+    <po-number
+      [p-auto-focus]="true"
+      p-placeholder="0"
+      p-label="Quantidade"
+      [p-min]="min"
+      [p-max]="max"
+      p-required="true"
+      name="quantity"
+      [(ngModel)]="quantity"
+      (p-change)="onPriceChange($event)"
+    >
+    </po-number>
+    <po-decimal
+      p-label="Vlr. Total"
+      p-disabled="true"
+      p-icon="po-icon-finance-secure"
+      name="total"
+      [(ngModel)]="total"
+    ></po-decimal>
+  </form>
+</po-modal>
 
 <div class="po-md-12 po-mt-2">
-  <po-list-view p-property-title="description" [p-items]="products" (p-title-action)="modal.open()">
-    <ng-template p-list-view-content-template let-item>
+  <div class="po-row">
+    <div class="po-xl-2 po-lg-2 po-offset-md-2 po-sm-12">
+      <app-filter-input
+        placeHolder="Pesquisar..."
+        help="Efetue a busca utilizando código do produto ou descrição"
+        [debounceInput]="1000"
+        (changeSearch)="onSearch($event)"
+        [hidden]="products.length <= 0"
+      ></app-filter-input>
+    </div>
+  </div>
+
+  <po-list-view
+    p-property-title="description"
+    [p-items]="products"
+    [p-actions]="actions"
+    (p-title-action)="showModal($event)"
+  >
+    <ng-template appDarkenOnHover p-list-view-content-template let-item>
       <div class="po-row">
         <po-info
           class="po-md-12"
@@ -44,4 +99,3 @@
     </ng-template>
   </po-list-view>
 </div>
-
