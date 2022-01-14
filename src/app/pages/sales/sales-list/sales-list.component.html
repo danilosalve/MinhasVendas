@@ -3,7 +3,7 @@
     <div class="po-offset-xl-9 po-offset-lg-8 po-offset-md-7 po-sm-12">
       <app-filter-input
         placeHolder="Pesquisar..."
-        (changeSearch)="searchSales($event)"
+        (changeSearch)="onSearchSales($event)"
         help="Efetue a busca utilizando código do Pedido ou Nome do Cliente"
         [debounceInput]="1000"
       ></app-filter-input>
